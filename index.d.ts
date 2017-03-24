@@ -1,7 +1,7 @@
 /// <reference types="mysql" />
 import * as mysql from 'mysql';
 
-declare global {
+declare module 'promise-mysql' {
 	interface IPromisifiedQueryFunction {
 		(sql: string): Promise<any[]>;
 		(sql: string, values: any[]): Promise<any[]>;
@@ -41,9 +41,7 @@ declare global {
 		escapeId(value: string): string;
 		escapeId(values: string[]): string;
 	}
-}
 
-declare module 'promise-mysql' {
 	function createConnection(config: mysql.IConnectionConfig): IPromisifiedConnection;
 	function createPool(config: mysql.IPoolConfig): IPromisifiedPool;
 
