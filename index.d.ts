@@ -3,12 +3,12 @@ import * as mysql from 'mysql';
 
 declare global {
 	interface IPromisifiedQueryFunction {
-		(sql: string): Promise<mysql.IQuery>;
-		(sql: string, values: any[]): Promise<mysql.IQuery>;
-		(sql: string, values: any): Promise<mysql.IQuery>;
-		(options: mysql.IQueryOptions): Promise<mysql.IQuery>;
-		(options: mysql.IQueryOptions, values: any[]): Promise<mysql.IQuery>;
-		(options: mysql.IQueryOptions, values: any): Promise<mysql.IQuery>;
+		(sql: string): Promise<any[]>;
+		(sql: string, values: any[]): Promise<any[]>;
+		(sql: string, values: any): Promise<any[]>;
+		(options: mysql.IQueryOptions): Promise<any[]>;
+		(options: mysql.IQueryOptions, values: any[]): Promise<any[]>;
+		(options: mysql.IQueryOptions, values: any): Promise<any[]>;
 	}
 
 	interface IPromisifiedConnection {
