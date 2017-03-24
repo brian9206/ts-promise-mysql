@@ -2,7 +2,7 @@
 import * as mysql from 'mysql';
 
 declare module 'promise-mysql' {
-	interface IPromisifiedQueryFunction {
+	interface IQueryFunction {
 		(sql: string): Promise<any[]>;
 		(sql: string, values: any[]): Promise<any[]>;
 		(sql: string, values: any): Promise<any[]>;
@@ -11,8 +11,8 @@ declare module 'promise-mysql' {
 		(options: mysql.IQueryOptions, values: any): Promise<any[]>;
 	}
 
-	interface IPromisifiedConnection {
-		query: IPromisifiedQueryFunction;
+	interface IConnection {
+		query: IQueryFunction;
 		beginTransaction(): Promise<void>;
 		commit(): Promise<void>;
 		rollback(): Promise<void>;
@@ -31,10 +31,10 @@ declare module 'promise-mysql' {
 		format(sql: string, values: any): string;
 	}
 
-	interface IPromisifiedPool {
-		getConnection(): Promise<IPromisifiedConnection>;
-		releaseConnection(connection: IPromisifiedConnection): void;
-		query: IPromisifiedQueryFunction;
+	interface IPool {
+		getConnection(): Promise<IConnection>;
+		releaseConnection(connection: IConnection): void;
+		query: IQueryFunction;
 		end(): Promise<void>;
 		escape(value: any): string;
 
@@ -42,8 +42,8 @@ declare module 'promise-mysql' {
 		escapeId(values: string[]): string;
 	}
 
-	function createConnection(config: mysql.IConnectionConfig): IPromisifiedConnection;
-	function createPool(config: mysql.IPoolConfig): IPromisifiedPool;
+	function createConnection(config: mysql.IConnectionConfig): IConnection;
+	function createPool(config: mysql.IPoolConfig): IPool;
 
 	var Types: mysql.FieldType;
 
